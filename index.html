@@ -153,17 +153,14 @@
 </head>
 <body class="light-mode">
 
-  <!-- 文件选择 -->
   <div id="fileInputContainer">
     <input type="file" id="fileInput" accept=".md">
   </div>
 
-  <!-- Markdown 阅读器 -->
   <div id="viewer">
     <div id="content"></div>
   </div>
 
-  <!-- 状态栏 -->
   <div class="status-bar" id="statusBar">
     <button id="prevBtn" onclick="prevPage()">⬅️</button>
     <button id="nextBtn" onclick="nextPage()">➡️</button>
@@ -236,32 +233,38 @@
         renderPage();
       }
     }
-
     function createPagePreviews() {
-      previewContainer.innerHTML = '';
-      const isDark = document.body.classList.contains('dark-mode');
+        previewContainer.innerHTML = ''; // Clear previous previews
+        const isDark = document.body.classList.contains('dark-mode'); // Check if dark mode is enabled
 
-      pages.forEach((page, index) => {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = 160;
-        canvas.height = 80;
+        pages.forEach((page, index) => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
 
-        ctx.fillStyle = isDark ? "#1e1e1e" : "#ffffff";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = isDark ? "#dddddd" : "#000000";
-        ctx.font = "12px sans-serif";
+            // Increase canvas resolution to ensure clarity
+            const scale = window.devicePixelRatio || 1; // Get the device pixel ratio (e.g., 2 for Retina displays)
+            canvas.width = 160 * scale; // Increase width based on pixel ratio
+            canvas.height = 80 * scale; // Increase height based on pixel ratio
+            ctx.scale(scale, scale); // Apply the scale to the canvas context to ensure proper display
 
-        const text = marked.parse(page).replace(/<[^>]*>?/gm, '').slice(0, 100);
-        wrapText(ctx, text, 10, 20, 140, 14);
+            ctx.fillStyle = isDark ? "#1e1e1e" : "#ffffff"; // Set background color based on theme
+            ctx.fillRect(0, 0, canvas.width, canvas.height); // Fill the background
+            ctx.fillStyle = isDark ? "#dddddd" : "#000000"; // Set text color based on theme
+            ctx.font = "12px sans-serif"; // Set font for text
 
-        const wrapper = document.createElement('div');
-        wrapper.classList.add('page-preview');
-        wrapper.appendChild(canvas);
-        wrapper.onclick = () => goToPage(index);
-        previewContainer.appendChild(wrapper);
-      });
+            // Extract and truncate the text content from the page for the preview
+            const text = marked.parse(page).replace(/<[^>]*>?/gm, '').slice(0, 100);
+            wrapText(ctx, text, 10, 20, 140, 14); // Wrap the text within the canvas
+
+            const wrapper = document.createElement('div');
+            wrapper.classList.add('page-preview');
+            wrapper.appendChild(canvas); // Append the canvas to the wrapper
+            wrapper.onclick = () => goToPage(index); // Set onclick to go to the corresponding page
+            previewContainer.appendChild(wrapper); // Append the wrapper to the preview container
+        });
     }
+
+
 
     function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
       const words = text.split(' ');
@@ -309,7 +312,7 @@
       if (y > h - 100) {
         statusBar.classList.add('visible');
         if (hideTimer) clearTimeout(hideTimer);
-        hideTimer = setTimeout(() => statusBar.classList.remove('visible'), 2000);
+        hideTimer = setTimeout(() => statusBar.classList.remove('visible'), 1000);
       }
     });
 
