@@ -2,8 +2,8 @@
 
 # Markdown-PPT-Viewer 📚📄
 
+![image](https://github.com/user-attachments/assets/77d97dec-89d7-467f-bf81-ee0234eb37cc)
 
-![image](https://github.com/user-attachments/assets/0ab0265d-57cc-495c-bb55-e1a9eefd3e7a)
 
 ---
 ## Introduction 🌟
