@@ -10,6 +10,12 @@ Code Section
 print("hello world!")
 
 ```
+
+```rust
+fn main() {
+    println!("This is Rust")
+}
+```
 ---
 
 More Section

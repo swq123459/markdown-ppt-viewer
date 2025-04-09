@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
   <meta charset="UTF-8">
   <title>Markdown PPT Viewer</title>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -207,8 +209,30 @@
       reader.readAsText(file);
     });
 
+    // Update the renderPage function to dynamically load language support
     function renderPage() {
-      document.getElementById('content').innerHTML = marked.parse(pages[currentPage]);
+      const contentElement = document.getElementById('content');
+      contentElement.innerHTML = marked.parse(pages[currentPage]);
+
+      // Apply syntax highlighting
+      const codeBlocks = contentElement.querySelectorAll('pre code');
+      codeBlocks.forEach((block) => {
+        const language = block.className.replace('language-', ''); // Extract language from class
+        if (language) {
+          // Dynamically load the language module if not already loaded
+          import(`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/${language}.min.js`)
+            .then(() => {
+              hljs.highlightElement(block); // Highlight the block after loading the language
+            })
+            .catch(() => {
+              console.warn(`Language module for "${language}" could not be loaded.`);
+              hljs.highlightElement(block); // Fallback to default highlighting
+            });
+        } else {
+          hljs.highlightElement(block); // Highlight without specific language
+        }
+      });
+
       pageInput.value = currentPage + 1;
       totalPages.innerText = pages.length;
     }
@@ -331,3 +355,4 @@
   </script>
 </body>
 </html>
+```
