@@ -2,6 +2,10 @@
 
 # Markdown-PPT-Viewer 📚📄
 
+
+![image](https://github.com/user-attachments/assets/0ab0265d-57cc-495c-bb55-e1a9eefd3e7a)
+
+---
 ## Introduction 🌟
 
 Welcome to the **Markdown Paginator**! This is a browser-based Markdown file viewer and paginator like a `PPT`. You can select a `.md` file and view it in pages with an easy-to-navigate interface. It supports page previews, theme switching, and more! 🌙🌞
@@ -39,10 +43,7 @@ open index.html
 ```
 
 
-## Screenshots 📸
 
-
-![image](https://github.com/user-attachments/assets/0ab0265d-57cc-495c-bb55-e1a9eefd3e7a)
 
 ## Contributing 🤝
 
