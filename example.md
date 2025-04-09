@@ -1,11 +1,15 @@
-First Section
+Pic Section
 
 - 😄 This is First Section
+
 ---
 
-Next Section
-- 😄 This is Next Section
+Code Section
+- 😄 This is Code Section
+```python
+print("hello world!")
 
+```
 ---
 
 More Section

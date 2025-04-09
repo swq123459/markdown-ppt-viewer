@@ -50,6 +50,15 @@
       box-sizing: border-box;
     }
 
+    /* Ensure images inside Markdown scale properly and keep aspect ratio */
+    #content img {
+      width: 100%; /* Make images scale to the width of their container */
+      max-width: 100%;
+      height: auto; /* Maintain aspect ratio */
+      display: block;
+      margin: 0 auto;
+    }
+
     .status-bar {
       position: fixed;
       bottom: 0;
@@ -163,7 +172,6 @@
       <input type="number" id="pageInput" min="1" value="1"> / <span id="totalPages">1</span>
     </div>
     <button id="themeToggle">🌙</button>
-
   </div>
 
   <script>
@@ -179,7 +187,6 @@
     const pageInput = document.getElementById('pageInput');
     const totalPages = document.getElementById('totalPages');
     const themeToggle = document.getElementById('themeToggle');
-
 
     document.getElementById('fileInput').addEventListener('change', function (event) {
       const file = event.target.files[0];
