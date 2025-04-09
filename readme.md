@@ -41,7 +41,8 @@ open index.html
 
 ## Screenshots 📸
 
-![Screenshot](screenshot.png)
+
+![image](https://github.com/user-attachments/assets/0ab0265d-57cc-495c-bb55-e1a9eefd3e7a)
 
 ## Contributing 🤝
 
