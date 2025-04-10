@@ -246,9 +246,19 @@
 
       // Apply syntax highlighting
       const codeBlocks = contentElement.querySelectorAll('pre code');
+      let hasMermaid = false; // Flag to check if mermaid is needed
+
       codeBlocks.forEach((block) => {
         const language = block.className.replace('language-', ''); // Extract language from class
-        if (language) {
+        if (language === 'mermaid') {
+          hasMermaid = true; // Set flag to true if mermaid block is detected
+
+          // Replace the code block with a div for mermaid rendering
+          const mermaidDiv = document.createElement('div');
+          mermaidDiv.className = 'mermaid';
+          mermaidDiv.textContent = block.textContent; // Set the mermaid diagram content
+          block.parentElement.replaceWith(mermaidDiv); // Replace the <pre><code> block
+        } else if (language) {
           // Dynamically load the language module if not already loaded
           import(`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/${language}.min.js`)
             .then(() => {
@@ -262,6 +272,30 @@
           hljs.highlightElement(block); // Highlight without specific language
         }
       });
+
+      // Dynamically load mermaid.js if needed
+      if (hasMermaid) {
+        if (!window.mermaid) {
+          const script = document.createElement('script');
+          script.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
+          script.onload = () => {
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            mermaid.initialize({
+              startOnLoad: false,
+              theme: isDarkMode ? 'dark' : 'default', // Dynamically set theme
+            });
+            mermaid.init(undefined, contentElement.querySelectorAll('.mermaid'));
+          };
+          document.body.appendChild(script);
+        } else {
+          const isDarkMode = document.body.classList.contains('dark-mode');
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: isDarkMode ? 'dark' : 'default', // Dynamically set theme
+          });
+          mermaid.init(undefined, contentElement.querySelectorAll('.mermaid'));
+        }
+      }
 
       pageInput.value = currentPage + 1;
       totalPages.innerText = pages.length;
