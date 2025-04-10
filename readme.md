@@ -20,6 +20,9 @@ Whether you're reading long Markdown files or just want a smoother navigation ex
 - **Theme Switcher**: 🌙☀️ Toggle between **dark mode** and **light mode** for comfortable reading.
 - **Mouse Wheel Support**: 🖱️ Scroll horizontally through page previews.
 - **Page Jump**: 🔢 Type a page number in the page info field to jump directly to that page.
+- **mermaid**:✅
+- **markdown table**:✅
+- **code block**:✅
 ---
 
 ## How to Use 💻

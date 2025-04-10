@@ -18,6 +18,23 @@ fn main() {
 }
 ```
 ---
+This is chat section
+| Month    | Savings |
+| -------- | ------- |
+| January  | $250    |
+| February | $80     |
+| March    | $420    |
+
+
+```mermaid
+sequenceDiagram
+    Alice->>John: Hello John, how are you?
+    John-->>Alice: Great!
+    Alice-)John: See you later!
+
+```
+
+---
 
 More Section
 - ❤️ This is More Section
