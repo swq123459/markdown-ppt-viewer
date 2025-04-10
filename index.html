@@ -151,6 +151,29 @@
       max-height: 80px;
       border-radius: 4px;
     }
+
+    #content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    #content th, #content td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    #content th {
+      background-color: #f4f4f4;
+      font-weight: bold;
+    }
+
+    /* 适配黑暗模式的表头样式 */
+    body.dark-mode #content th {
+      background-color: #333; /* 深色背景 */
+      color: #fff; /* 白色文字 */
+    }
   </style>
 </head>
 <body class="light-mode">
@@ -174,6 +197,13 @@
   </div>
 
   <script>
+    // 配置 marked.js 以支持表格
+    marked.setOptions({
+      gfm: true, // 启用 GitHub 风格的 Markdown
+      tables: true, // 启用表格支持
+      breaks: true // 支持换行符
+    });
+
     let pages = [];
     let currentPage = 0;
     let hideTimer = null;
@@ -355,4 +385,3 @@
   </script>
 </body>
 </html>
-```
